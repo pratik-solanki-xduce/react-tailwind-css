@@ -1,0 +1,32 @@
+nav ul{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    text-align: center;
+}
+
+nav{
+    width: 100%;
+}
+
+.container{
+    width: 1320px;
+    flex-wrap: wrap;
+    display: flex;
+    margin: auto;
+    border: 1px solid red;
+}
+
+.blogItems{
+    text-align: center;
+    padding-bottom: 10px;
+    box-shadow: 0px 0px 10px 2px #ccc;
+    flex-basis: 23%;
+    margin: 1%;
+}
