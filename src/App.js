@@ -3,6 +3,8 @@ import './App.css';
 import { useState } from 'react';
 import btnModule from "./Button.module.css"
 import { FAQs } from './FAQ';
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,7 +18,8 @@ function App() {
   }
 
   const showData = (name) => {
-    alert(`Welcome ${name}`)
+    // alert(`Welcome ${name}`)
+    NotificationManager.info(`Welcome ${name}`);
   }
 
   const increaseCount = () => {
@@ -25,6 +28,8 @@ function App() {
 
   return (
     <div className="App">
+      <NotificationContainer/>
+
       <button className='enquire border-2 border-black bg-sky-500/100' onClick={() => setModal(true)}>Enquire Now</button>
       <div onClick={() => setModal(false)} className={`modalOverlay ${modal ? "modalShow" : ""}`}></div>
       <div className={`modalDiv ${modal ? "showModalDiv" : ""}`}>
