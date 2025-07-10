@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './App.css';
 import { Col, Container, Row, Table } from 'react-bootstrap';
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
   const initialValue = {
@@ -13,20 +15,23 @@ function App() {
   const [formData, setFormData] = useState(initialValue)
   const [userData, setUserData] = useState([])
 
-  const checkUserDetails = userData.filter((data) => data.email === formData.email || data.phone === formData.phone)
+  // const checkUserDetails = userData.filter((data) => data.email === formData.email || data.phone === formData.phone)
+  const checkUserDetails = userData.filter((data, index) => (data.email === formData.email || data.phone === formData.phone) && index !== formData.index)
 
   const handleSubmit = (event) => {
     if (checkUserDetails.length === 1) {
-      alert("Data Exists....")
+      toast.error("Email or Phone Already Exists....")
     } else {
       const { index, ...cleanData } = formData;
       if (index !== "") {
         const updatedData = [...userData];
         updatedData[index] = cleanData;
         setUserData(updatedData);
+        toast.success("Data Updated Successfully")
 
       } else {
         setUserData([...userData, cleanData])
+        toast.success("Data added Successfully")
       }
       setFormData(initialValue)
     }
@@ -44,6 +49,7 @@ function App() {
     if (window.confirm("Are you sure you want to delete this entry?")) {
       const updatedUserData = userData.filter((_, i) => i !== index);
       setUserData(updatedUserData);
+      toast.success("Data Deleted Successfully")
     }
   };
 
@@ -51,6 +57,7 @@ function App() {
 
   return (
     <Container fluid>
+      <ToastContainer />
       <Container>
         <Row>
           <Col className='text-center mb-5'>
